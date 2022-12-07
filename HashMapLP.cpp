@@ -92,6 +92,7 @@ std::vector<House> HashMapLP::find(string& key) {
 
 int HashMapLP::hash(string& key) {
     // Hashes and reduces the given key for the table
+    // Uses ASCII powers method for hashing a string key
     int hash = 0;
     for (int i = 0; i < key.size(); i++) {
         hash += key[i] * std::pow(31, i);
