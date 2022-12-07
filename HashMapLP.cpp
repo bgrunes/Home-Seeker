@@ -93,8 +93,8 @@ std::vector<House> HashMapLP::find(string& key) {
 int HashMapLP::hash(string& key) {
     // Hashes and reduces the given key for the table
     int hash = 0;
-    for(char c : key) {
-        hash += c;
+    for (int i = 0; i < key.size(); i++) {
+        hash += key[i] * std::pow(31, i);
     }
     return hash % capacity;
 }
