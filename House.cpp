@@ -1,20 +1,23 @@
 #pragma once
 #include <string>
+#include <iostream>
 
 struct House {
-    int zipCode;
-    double area;
-    double price;
+    std::string zipCode;
+    std::string area;
+    std::string price;
     std::string city;
     std::string state;
     std::string address;
     House() {
-        zipCode = 0;
-        price = 0;
-        area = 0;
+        zipCode = "";
+        price = "";
+        area = "";
         address = "";
+        city = "";
+        state = "";
     }
-    House(int zipCode, double price, double area, std::string& addrCity, std::string& addrState, std::string& addr) {
+    House(std::string& zipCode, std::string& price, std::string& area, std::string& addrCity, std::string& addrState, std::string& addr) {
         this->zipCode = zipCode;
         this->area = area;
         this->price = price;
@@ -25,6 +28,6 @@ struct House {
 
     void print()
     {
-        cout << address << " " << zipCode << ", " << area << "sq. ft., " << "$" << price;
+        std::cout << "Address  : " << address << "\n" << "Zip Code : " << zipCode << "\n" << "Price    : $" << price << "\n";
     }
 };
