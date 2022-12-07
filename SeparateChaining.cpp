@@ -1,4 +1,5 @@
 #include "SeparateChaining.h"
+#include <cmath>
 
 Node::Node() {
     key = "";
@@ -14,7 +15,8 @@ Node::Node(std::string& k, std::vector<House>& v, Node* ptr) {
 
 HashTableSC::HashTableSC() {
     size = 0;
-    capacity = 100;
+    capacity = 10000;
+    table.resize(capacity);
 }
 
 HashTableSC::HashTableSC(int cap) {
@@ -42,7 +44,8 @@ void HashTableSC::insert(std::string& key, House& value) {
     // Otherwise create a vector containing that single element at that key
     std::vector<House> vec = {value};
     // Add (key-value) pair to table, and shift the linked list if necessary
-    table[index] = new Node(key, vec, table[index]);
+    Node* nxt = table[index];
+    table[index] = new Node(key, vec, nxt);
 }
 
 std::vector<House> HashTableSC::find(std::string& key) {
@@ -61,8 +64,8 @@ std::vector<House> HashTableSC::find(std::string& key) {
 int HashTableSC::hash(std::string& key) {
     // Hashes and reduces the given key for the table
     int hash = 0;
-    for (char c : key) {
-        hash += c;
+    for (int i = 0; i < key.size(); i++) {
+        hash += key[i] * std::pow(31, i);
     }
     return hash % capacity;
 }
